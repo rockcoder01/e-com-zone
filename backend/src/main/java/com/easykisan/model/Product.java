@@ -1,12 +1,15 @@
 package com.easykisan.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,9 +18,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "products")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
@@ -30,34 +33,31 @@ public class Product {
     @Size(max = 255)
     private String name;
     
-    @NotBlank
     @Column(columnDefinition = "TEXT")
     private String description;
     
-    @NotBlank
-    @Size(max = 100)
-    private String slug;
-    
-    @NotNull
-    @Column(precision = 10, scale = 2)
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer = 10, fraction = 2)
     private BigDecimal price;
     
-    @Column(precision = 10, scale = 2)
+    @DecimalMin(value = "0.0", inclusive = true)
+    @Digits(integer = 10, fraction = 2)
     private BigDecimal originalPrice;
     
-    @NotNull
     private Integer stock;
     
-    @NotBlank
-    @Size(max = 50)
+    @Size(max = 100)
     private String sku;
+    
+    @Size(max = 255)
+    private String slug;
     
     @ElementCollection
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "image_url")
     private List<String> images = new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
         name = "product_categories",
         joinColumns = @JoinColumn(name = "product_id"),
@@ -65,52 +65,40 @@ public class Product {
     )
     private Set<Category> categories = new HashSet<>();
     
-    private Double rating = 0.0;
-    
-    private Integer reviewCount = 0;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vendor_id")
-    private Vendor vendor;
-    
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductAttribute> attributes = new ArrayList<>();
+    private Set<ProductAttribute> attributes = new HashSet<>();
     
     @ElementCollection
     @CollectionTable(name = "product_tags", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "tag")
-    private List<String> tags = new ArrayList<>();
+    private Set<String> tags = new HashSet<>();
     
-    private LocalDateTime createdAt;
+    private Double rating = 0.0;
     
-    private LocalDateTime updatedAt;
+    private Integer reviewCount = 0;
+    
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
     
     private boolean isActive = true;
     
-    private boolean isFeatured = false;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
     
-    private boolean isOnSale = false;
-    
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
     
     // Helper method to add a category
     public void addCategory(Category category) {
-        this.categories.add(category);
+        categories.add(category);
         category.getProducts().add(this);
     }
     
     // Helper method to remove a category
     public void removeCategory(Category category) {
-        this.categories.remove(category);
+        categories.remove(category);
         category.getProducts().remove(this);
     }
     

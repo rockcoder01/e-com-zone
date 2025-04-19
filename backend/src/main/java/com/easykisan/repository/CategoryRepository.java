@@ -15,30 +15,21 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     
     Optional<Category> findBySlug(String slug);
     
-    Boolean existsBySlug(String slug);
+    List<Category> findByNameContainingIgnoreCase(String name);
     
-    Boolean existsByName(String name);
-    
-    List<Category> findByParentIdIsNull();
+    Page<Category> findByNameContainingIgnoreCase(String name, Pageable pageable);
     
     List<Category> findByParentId(Long parentId);
     
-    List<Category> findByIsActive(boolean isActive);
+    @Query("SELECT c FROM Category c WHERE c.parent IS NULL")
+    List<Category> findRootCategories();
     
-    List<Category> findByIsActiveOrderByDisplayOrderAsc(boolean isActive);
+    @Query("SELECT c FROM Category c WHERE c.parent IS NULL")
+    Page<Category> findRootCategories(Pageable pageable);
     
-    @Query("SELECT c FROM Category c WHERE c.parent IS NULL AND c.isActive = true ORDER BY c.displayOrder ASC")
-    List<Category> findAllParentCategories();
+    @Query("SELECT c FROM Category c WHERE c.parent IS NULL ORDER BY c.sortOrder ASC")
+    List<Category> findRootCategoriesSorted();
     
-    @Query("SELECT c FROM Category c JOIN FETCH c.children WHERE c.id = :categoryId")
-    Optional<Category> findByIdWithChildren(Long categoryId);
-    
-    @Query("SELECT c FROM Category c JOIN FETCH c.products WHERE c.id = :categoryId")
-    Optional<Category> findByIdWithProducts(Long categoryId);
-    
-    @Query("SELECT DISTINCT c FROM Category c JOIN c.products p WHERE p.id = :productId")
-    List<Category> findByProductId(Long productId);
-    
-    @Query(value = "SELECT c.* FROM categories c JOIN product_categories pc ON c.id = pc.category_id GROUP BY c.id ORDER BY COUNT(pc.product_id) DESC LIMIT :limit", nativeQuery = true)
-    List<Category> findMostPopularCategories(int limit);
+    @Query("SELECT c FROM Category c WHERE c.parent.id = :parentId ORDER BY c.sortOrder ASC")
+    List<Category> findByParentIdSorted(Long parentId);
 }

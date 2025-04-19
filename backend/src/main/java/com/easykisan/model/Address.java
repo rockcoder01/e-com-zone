@@ -1,17 +1,20 @@
 package com.easykisan.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "addresses")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
@@ -20,9 +23,9 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private AddressType type = AddressType.SHIPPING;
     
     @NotBlank
     @Size(max = 100)
@@ -32,50 +35,37 @@ public class Address {
     private String addressLine2;
     
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 100)
     private String city;
     
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 100)
     private String state;
     
     @NotBlank
-    @Size(max = 10)
+    @Size(max = 20)
     private String postalCode;
     
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 100)
     private String country;
     
-    @Size(max = 20)
-    private String phone;
+    private boolean isDefault = false;
     
-    @Size(max = 50)
-    private String fullName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
     
-    private boolean isDefault;
-    
-    @Enumerated(EnumType.STRING)
-    private AddressType addressType;
-    
+    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
     
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
     
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-    
     public enum AddressType {
-        BILLING,
         SHIPPING,
-        BOTH
+        BILLING
     }
 }

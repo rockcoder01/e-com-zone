@@ -6,17 +6,21 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "vendors")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"products"})
 public class Vendor {
     
     @Id
@@ -27,7 +31,6 @@ public class Vendor {
     @Size(max = 100)
     private String name;
     
-    @NotBlank
     @Size(max = 100)
     @Column(unique = true)
     private String slug;
@@ -35,10 +38,8 @@ public class Vendor {
     @Column(columnDefinition = "TEXT")
     private String description;
     
-    @Size(max = 255)
     private String logoUrl;
     
-    @Size(max = 255)
     private String bannerUrl;
     
     @NotBlank
@@ -46,61 +47,45 @@ public class Vendor {
     @Email
     private String email;
     
-    @Size(max = 20)
+    @Size(max = 15)
     private String phone;
     
     @Size(max = 255)
     private String address;
     
-    @Size(max = 50)
+    @Size(max = 100)
     private String city;
     
-    @Size(max = 50)
+    @Size(max = 100)
     private String state;
     
-    @Size(max = 10)
+    @Size(max = 20)
     private String postalCode;
     
-    @Size(max = 50)
+    @Size(max = 100)
     private String country;
     
     private Double rating = 0.0;
     
     private Integer reviewCount = 0;
     
-    @Column(columnDefinition = "TEXT")
-    private String returnPolicy;
-    
-    @Column(columnDefinition = "TEXT")
-    private String shippingPolicy;
-    
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products = new ArrayList<>();
-    
-    private LocalDateTime createdAt;
-    
-    private LocalDateTime updatedAt;
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL)
+    private Set<Product> products = new HashSet<>();
     
     private boolean isActive = true;
     
     private boolean isVerified = false;
     
-    private boolean isFeatured = false;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
     
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
     
     // Helper method to add a product
     public void addProduct(Product product) {

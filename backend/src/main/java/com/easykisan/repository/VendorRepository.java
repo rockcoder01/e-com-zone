@@ -17,24 +17,16 @@ public interface VendorRepository extends JpaRepository<Vendor, Long> {
     
     Optional<Vendor> findByUserId(Long userId);
     
-    Optional<Vendor> findByEmail(String email);
+    List<Vendor> findByNameContainingIgnoreCase(String name);
     
-    Boolean existsBySlug(String slug);
+    Page<Vendor> findByNameContainingIgnoreCase(String name, Pageable pageable);
     
-    Boolean existsByEmail(String email);
+    @Query("SELECT v FROM Vendor v WHERE v.isActive = true AND v.isVerified = true ORDER BY v.rating DESC")
+    Page<Vendor> findTopVendors(Pageable pageable);
     
-    Page<Vendor> findByIsActive(boolean isActive, Pageable pageable);
+    @Query("SELECT v FROM Vendor v WHERE v.isActive = true AND v.isVerified = true ORDER BY v.createdAt DESC")
+    Page<Vendor> findNewVendors(Pageable pageable);
     
-    Page<Vendor> findByIsActiveAndIsVerified(boolean isActive, boolean isVerified, Pageable pageable);
-    
-    Page<Vendor> findByIsActiveAndIsFeatured(boolean isActive, boolean isFeatured, Pageable pageable);
-    
-    @Query("SELECT v FROM Vendor v WHERE v.name LIKE %:keyword% OR v.description LIKE %:keyword% AND v.isActive = true")
-    Page<Vendor> searchVendors(String keyword, Pageable pageable);
-    
-    @Query(value = "SELECT * FROM vendors v WHERE v.is_active = true ORDER BY v.rating DESC LIMIT :limit", nativeQuery = true)
+    @Query(value = "SELECT * FROM vendors v ORDER BY v.rating DESC LIMIT :limit", nativeQuery = true)
     List<Vendor> findTopRatedVendors(int limit);
-    
-    @Query(value = "SELECT v.* FROM vendors v JOIN products p ON v.id = p.vendor_id GROUP BY v.id ORDER BY COUNT(p.id) DESC LIMIT :limit", nativeQuery = true)
-    List<Vendor> findVendorsWithMostProducts(int limit);
 }

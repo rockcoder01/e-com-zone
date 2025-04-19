@@ -17,26 +17,25 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String username;
     private String email;
-    private String firstName;
-    private String lastName;
-    private String profileImage;
-
+    
     @JsonIgnore
     private String password;
-
+    
     private Collection<? extends GrantedAuthority> authorities;
+    
+    private boolean isActive;
+    
+    private boolean isEmailVerified;
 
     public UserDetailsImpl(Long id, String username, String email, String password,
-                           String firstName, String lastName, String profileImage,
-                           Collection<? extends GrantedAuthority> authorities) {
+                          Collection<? extends GrantedAuthority> authorities, boolean isActive, boolean isEmailVerified) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profileImage = profileImage;
         this.authorities = authorities;
+        this.isActive = isActive;
+        this.isEmailVerified = isEmailVerified;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -49,10 +48,9 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getProfileImage(),
-                authorities);
+                authorities,
+                user.isActive(),
+                user.isEmailVerified());
     }
 
     @Override
@@ -66,18 +64,6 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-    
-    public String getProfileImage() {
-        return profileImage;
     }
 
     @Override
@@ -97,7 +83,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isActive;
     }
 
     @Override
@@ -107,7 +93,11 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive;
+    }
+    
+    public boolean isEmailVerified() {
+        return isEmailVerified;
     }
 
     @Override
@@ -118,10 +108,5 @@ public class UserDetailsImpl implements UserDetails {
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
