@@ -1,0 +1,1365 @@
+E-Commerce Platform Project Structure
+Frontend (Angular)
+ecommerce-frontend/
+ecommerce-frontend/
+├── src/
+│   ├── app/
+│   │   ├── core/                      # Core modules, services, guards
+│   │   │   ├── guards/
+│   │   │   │   ├── auth.guard.ts
+│   │   │   │   ├── admin.guard.ts
+│   │   │   │   ├── vendor.guard.ts
+│   │   │   │   └── influencer.guard.ts
+│   │   │   ├── interceptors/
+│   │   │   │   ├── auth.interceptor.ts
+│   │   │   │   ├── error.interceptor.ts
+│   │   │   │   └── loader.interceptor.ts
+│   │   │   ├── services/
+│   │   │   │   ├── auth.service.ts
+│   │   │   │   ├── user.service.ts
+│   │   │   │   ├── product.service.ts
+│   │   │   │   ├── cart.service.ts
+│   │   │   │   ├── order.service.ts
+│   │   │   │   ├── payment.service.ts
+│   │   │   │   ├── influencer.service.ts
+│   │   │   │   ├── vendor.service.ts
+│   │   │   │   ├── admin.service.ts
+│   │   │   │   ├── notification.service.ts
+│   │   │   │   └── tracking.service.ts
+│   │   │   └── core.module.ts
+│   │   │
+│   │   ├── shared/                    # Shared components, directives, pipes
+│   │   │   ├── components/
+│   │   │   │   ├── header/
+│   │   │   │   ├── footer/
+│   │   │   │   ├── product-card/
+│   │   │   │   ├── rating/
+│   │   │   │   ├── pagination/
+│   │   │   │   ├── carousel/
+│   │   │   │   ├── search-bar/
+│   │   │   │   ├── filter/
+│   │   │   │   ├── alert/
+│   │   │   │   └── loading-spinner/
+│   │   │   ├── directives/
+│   │   │   │   ├── lazy-load.directive.ts
+│   │   │   │   └── click-outside.directive.ts
+│   │   │   ├── pipes/
+│   │   │   │   ├── currency.pipe.ts
+│   │   │   │   └── date-format.pipe.ts
+│   │   │   └── shared.module.ts
+│   │   │
+│   │   ├── store/                     # NgRx store (state management)
+│   │   │   ├── actions/
+│   │   │   │   ├── auth.actions.ts
+│   │   │   │   ├── product.actions.ts
+│   │   │   │   ├── cart.actions.ts
+│   │   │   │   ├── order.actions.ts
+│   │   │   │   └── notification.actions.ts
+│   │   │   ├── effects/
+│   │   │   │   ├── auth.effects.ts
+│   │   │   │   ├── product.effects.ts
+│   │   │   │   ├── cart.effects.ts
+│   │   │   │   ├── order.effects.ts
+│   │   │   │   └── notification.effects.ts
+│   │   │   ├── reducers/
+│   │   │   │   ├── auth.reducer.ts
+│   │   │   │   ├── product.reducer.ts
+│   │   │   │   ├── cart.reducer.ts
+│   │   │   │   ├── order.reducer.ts
+│   │   │   │   ├── notification.reducer.ts
+│   │   │   │   └── index.ts
+│   │   │   ├── selectors/
+│   │   │   │   ├── auth.selectors.ts
+│   │   │   │   ├── product.selectors.ts
+│   │   │   │   ├── cart.selectors.ts
+│   │   │   │   ├── order.selectors.ts
+│   │   │   │   └── notification.selectors.ts
+│   │   │   └── app.state.ts
+│   │   │
+│   │   ├── models/                    # Data models/interfaces
+│   │   │   ├── user.model.ts
+│   │   │   ├── product.model.ts
+│   │   │   ├── category.model.ts
+│   │   │   ├── cart.model.ts
+│   │   │   ├── order.model.ts
+│   │   │   ├── payment.model.ts
+│   │   │   ├── address.model.ts
+│   │   │   ├── review.model.ts
+│   │   │   ├── banner.model.ts
+│   │   │   ├── withdrawal.model.ts
+│   │   │   └── notification.model.ts
+│   │   │
+│   │   ├── modules/                   # Feature modules
+│   │   │   ├── auth/                  # Authentication module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── login/
+│   │   │   │   │   ├── register/
+│   │   │   │   │   ├── verify-email/
+│   │   │   │   │   └── forgot-password/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── login-form/
+│   │   │   │   │   ├── register-form/
+│   │   │   │   │   └── password-reset-form/
+│   │   │   │   └── auth.module.ts
+│   │   │   │
+│   │   │   ├── home/                  # Home module
+│   │   │   │   ├── pages/
+│   │   │   │   │   └── home/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── featured-products/
+│   │   │   │   │   ├── category-list/
+│   │   │   │   │   └── banner-carousel/
+│   │   │   │   └── home.module.ts
+│   │   │   │
+│   │   │   ├── product/               # Product module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── product-list/
+│   │   │   │   │   ├── product-detail/
+│   │   │   │   │   └── product-search/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── product-filter/
+│   │   │   │   │   ├── product-grid/
+│   │   │   │   │   ├── product-reviews/
+│   │   │   │   │   ├── product-gallery/
+│   │   │   │   │   ├── related-products/
+│   │   │   │   │   └── add-review-form/
+│   │   │   │   └── product.module.ts
+│   │   │   │
+│   │   │   ├── cart/                  # Cart module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── cart/
+│   │   │   │   │   └── checkout/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── cart-item/
+│   │   │   │   │   ├── cart-summary/
+│   │   │   │   │   ├── shipping-form/
+│   │   │   │   │   ├── payment-form/
+│   │   │   │   │   └── promo-code/
+│   │   │   │   └── cart.module.ts
+│   │   │   │
+│   │   │   ├── order/                 # Order module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── order-confirmation/
+│   │   │   │   │   ├── order-tracking/
+│   │   │   │   │   └── order-history/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── order-item/
+│   │   │   │   │   ├── order-summary/
+│   │   │   │   │   └── tracking-info/
+│   │   │   │   └── order.module.ts
+│   │   │   │
+│   │   │   ├── user/                  # User module (Customer profile)
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── profile/
+│   │   │   │   │   ├── addresses/
+│   │   │   │   │   ├── wishlist/
+│   │   │   │   │   └── notifications/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── profile-form/
+│   │   │   │   │   ├── address-form/
+│   │   │   │   │   ├── wishlist-item/
+│   │   │   │   │   └── notification-list/
+│   │   │   │   └── user.module.ts
+│   │   │   │
+│   │   │   ├── influencer/            # Influencer module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── earnings/
+│   │   │   │   │   ├── referrals/
+│   │   │   │   │   └── withdrawal/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── referral-stats/
+│   │   │   │   │   ├── earnings-chart/
+│   │   │   │   │   ├── commission-table/
+│   │   │   │   │   └── withdrawal-form/
+│   │   │   │   └── influencer.module.ts
+│   │   │   │
+│   │   │   ├── vendor/                # Vendor module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── products/
+│   │   │   │   │   ├── orders/
+│   │   │   │   │   ├── inventory/
+│   │   │   │   │   └── earnings/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── product-form/
+│   │   │   │   │   ├── sales-chart/
+│   │   │   │   │   ├── inventory-item/
+│   │   │   │   │   └── order-management/
+│   │   │   │   └── vendor.module.ts
+│   │   │   │
+│   │   │   ├── admin/                 # Admin module
+│   │   │   │   ├── pages/
+│   │   │   │   │   ├── dashboard/
+│   │   │   │   │   ├── users/
+│   │   │   │   │   ├── products/
+│   │   │   │   │   ├── orders/
+│   │   │   │   │   ├── banners/
+│   │   │   │   │   ├── categories/
+│   │   │   │   │   ├── reports/
+│   │   │   │   │   ├── withdrawals/
+│   │   │   │   │   └── settings/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── user-management/
+│   │   │   │   │   ├── product-approval/
+│   │   │   │   │   ├── order-management/
+│   │   │   │   │   ├── banner-form/
+│   │   │   │   │   ├── category-form/
+│   │   │   │   │   └── withdrawal-approval/
+│   │   │   │   └── admin.module.ts
+│   │   │   │
+│   │   │   └── static/                # Static pages module
+│   │   │       ├── pages/
+│   │   │       │   ├── about/
+│   │   │       │   ├── contact/
+│   │   │       │   ├── faq/
+│   │   │       │   ├── terms/
+│   │   │       │   └── privacy/
+│   │   │       ├── components/
+│   │   │       │   ├── contact-form/
+│   │   │       │   └── faq-list/
+│   │   │       └── static.module.ts
+│   │   │
+│   │   ├── app-routing.module.ts      # Main routing module
+│   │   ├── app.component.ts           # Root component
+│   │   ├── app.component.html         # Root component template
+│   │   └── app.module.ts              # Root module
+│   │
+│   ├── assets/                        # Static assets
+│   │   ├── images/
+│   │   │   ├── logo.png
+│   │   │   ├── banners/
+│   │   │   ├── product-placeholder.png
+│   │   │   └── icons/
+│   │   ├── fonts/
+│   │   └── styles/
+│   │       ├── variables.scss
+│   │       ├── mixins.scss
+│   │       ├── themes.scss
+│   │       └── global.scss
+│   │
+│   ├── environments/                  # Environment configurations
+│   │   ├── environment.ts
+│   │   ├── environment.dev.ts
+│   │   ├── environment.staging.ts
+│   │   └── environment.prod.ts
+│   │
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+│
+├── angular.json
+├── package.json
+├── tsconfig.json
+├── karma.conf.js
+├── .editorconfig
+├── .gitignore
+└── README.md
+
+
+Backend (springboot)
+ecommerce-backend/
+ecommerce-backend/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── easykisan/
+│   │   │           ├── EcommerceApplication.java      # Main application class
+│   │   │           │
+│   │   │           ├── config/                        # Configuration classes
+│   │   │           │   ├── SecurityConfig.java        # Security configuration
+│   │   │           │   ├── SwaggerConfig.java         # API documentation
+│   │   │           │   ├── WebConfig.java             # Web MVC configuration
+│   │   │           │   ├── JwtConfig.java             # JWT configuration
+│   │   │           │   ├── AuditConfig.java           # Auditing configuration
+│   │   │           │   ├── AsyncConfig.java           # Async task configuration
+│   │   │           │   └── CacheConfig.java           # Cache configuration
+│   │   │           │
+│   │   │           ├── controller/                    # REST API controllers
+│   │   │           │   ├── AuthController.java
+│   │   │           │   ├── UserController.java
+│   │   │           │   ├── ProductController.java
+│   │   │           │   ├── CategoryController.java
+│   │   │           │   ├── CartController.java
+│   │   │           │   ├── OrderController.java
+│   │   │           │   ├── PaymentController.java
+│   │   │           │   ├── ReviewController.java
+│   │   │           │   ├── InfluencerController.java
+│   │   │           │   ├── VendorController.java
+│   │   │           │   ├── AdminController.java
+│   │   │           │   ├── WithdrawalController.java
+│   │   │           │   ├── BannerController.java
+│   │   │           │   ├── NotificationController.java
+│   │   │           │   ├── AddressController.java
+│   │   │           │   └── FileUploadController.java
+│   │   │           │
+│   │   │           ├── service/                       # Business logic
+│   │   │           │   ├── interfaces/                # Service interfaces
+│   │   │           │   │   ├── AuthService.java
+│   │   │           │   │   ├── UserService.java
+│   │   │           │   │   ├── ProductService.java
+│   │   │           │   │   ├── CategoryService.java
+│   │   │           │   │   ├── CartService.java
+│   │   │           │   │   ├── OrderService.java
+│   │   │           │   │   ├── PaymentService.java
+│   │   │           │   │   ├── ReviewService.java
+│   │   │           │   │   ├── InfluencerService.java
+│   │   │           │   │   ├── VendorService.java
+│   │   │           │   │   ├── WithdrawalService.java
+│   │   │           │   │   ├── BannerService.java
+│   │   │           │   │   ├── NotificationService.java
+│   │   │           │   │   ├── AddressService.java
+│   │   │           │   │   ├── FileStorageService.java
+│   │   │           │   │   ├── EmailService.java
+│   │   │           │   │   └── SmsService.java
+│   │   │           │   │
+│   │   │           │   └── impl/                      # Service implementations
+│   │   │           │       ├── AuthServiceImpl.java
+│   │   │           │       ├── UserServiceImpl.java
+│   │   │           │       ├── ProductServiceImpl.java
+│   │   │           │       ├── CategoryServiceImpl.java
+│   │   │           │       ├── CartServiceImpl.java
+│   │   │           │       ├── OrderServiceImpl.java
+│   │   │           │       ├── PaymentServiceImpl.java
+│   │   │           │       ├── ReviewServiceImpl.java
+│   │   │           │       ├── InfluencerServiceImpl.java
+│   │   │           │       ├── VendorServiceImpl.java
+│   │   │           │       ├── WithdrawalServiceImpl.java
+│   │   │           │       ├── BannerServiceImpl.java
+│   │   │           │       ├── NotificationServiceImpl.java
+│   │   │           │       ├── AddressServiceImpl.java
+│   │   │           │       ├── FileStorageServiceImpl.java
+│   │   │           │       ├── EmailServiceImpl.java
+│   │   │           │       └── SmsServiceImpl.java
+│   │   │           │
+│   │   │           ├── repository/                    # Data access layer
+│   │   │           │   ├── UserRepository.java
+│   │   │           │   ├── ProductRepository.java
+│   │   │           │   ├── CategoryRepository.java
+│   │   │           │   ├── CartRepository.java
+│   │   │           │   ├── OrderRepository.java
+│   │   │           │   ├── PaymentRepository.java
+│   │   │           │   ├── ReviewRepository.java
+│   │   │           │   ├── InfluencerRepository.java
+│   │   │           │   ├── VendorRepository.java
+│   │   │           │   ├── WithdrawalRepository.java
+│   │   │           │   ├── BannerRepository.java
+│   │   │           │   ├── NotificationRepository.java
+│   │   │           │   └── AddressRepository.java
+│   │   │           │
+│   │   │           ├── model/                         # Data models/entities
+│   │   │           │   ├── User.java
+│   │   │           │   ├── Product.java
+│   │   │           │   ├── Category.java
+│   │   │           │   ├── Cart.java
+│   │   │           │   ├── CartItem.java
+│   │   │           │   ├── Order.java
+│   │   │           │   ├── OrderItem.java
+│   │   │           │   ├── Payment.java
+│   │   │           │   ├── Review.java
+│   │   │           │   ├── Influencer.java
+│   │   │           │   ├── Vendor.java
+│   │   │           │   ├── Withdrawal.java
+│   │   │           │   ├── Banner.java
+│   │   │           │   ├── Notification.java
+│   │   │           │   ├── Address.java
+│   │   │           │   ├── ProductVariant.java
+│   │   │           │   └── audit/
+│   │   │           │       ├── Auditable.java
+│   │   │           │       └── DateAudit.java
+│   │   │           │
+│   │   │           ├── dto/                           # Data Transfer Objects
+│   │   │           │   ├── request/                   # Request DTOs
+│   │   │           │   │   ├── LoginRequest.java
+│   │   │           │   │   ├── SignupRequest.java
+│   │   │           │   │   ├── ProductRequest.java
+│   │   │           │   │   ├── CategoryRequest.java
+│   │   │           │   │   ├── CartRequest.java
+│   │   │           │   │   ├── OrderRequest.java
+│   │   │           │   │   ├── PaymentRequest.java
+│   │   │           │   │   ├── ReviewRequest.java
+│   │   │           │   │   ├── InfluencerRequest.java
+│   │   │           │   │   ├── VendorRequest.java
+│   │   │           │   │   ├── WithdrawalRequest.java
+│   │   │           │   │   ├── BannerRequest.java
+│   │   │           │   │   ├── NotificationRequest.java
+│   │   │           │   │   └── AddressRequest.java
+│   │   │           │   │
+│   │   │           │   └── response/                  # Response DTOs
+│   │   │           │       ├── ApiResponse.java
+│   │   │           │       ├── JwtResponse.java
+│   │   │           │       ├── UserResponse.java
+│   │   │           │       ├── ProductResponse.java
+│   │   │           │       ├── CategoryResponse.java
+│   │   │           │       ├── CartResponse.java
+│   │   │           │       ├── OrderResponse.java
+│   │   │           │       ├── PaymentResponse.java
+│   │   │           │       ├── ReviewResponse.java
+│   │   │           │       ├── InfluencerResponse.java
+│   │   │           │       ├── VendorResponse.java
+│   │   │           │       ├── WithdrawalResponse.java
+│   │   │           │       ├── BannerResponse.java
+│   │   │           │       ├── NotificationResponse.java
+│   │   │           │       └── AddressResponse.java
+│   │   │           │
+│   │   │           ├── exception/                     # Exception handling
+│   │   │           │   ├── GlobalExceptionHandler.java
+│   │   │           │   ├── ResourceNotFoundException.java
+│   │   │           │   ├── BadRequestException.java
+│   │   │           │   ├── UnauthorizedException.java
+│   │   │           │   ├── FileStorageException.java
+│   │   │           │   └── PaymentException.java
+│   │   │           │
+│   │   │           ├── security/                      # Security components
+│   │   │           │   ├── JwtTokenProvider.java
+│   │   │           │   ├── JwtAuthenticationFilter.java
+│   │   │           │   ├── CustomUserDetailsService.java
+│   │   │           │   └── CurrentUser.java
+│   │   │           │
+│   │   │           ├── util/                          # Utility classes
+│   │   │           │   ├── AppConstants.java
+│   │   │           │   ├── FileUtils.java
+│   │   │           │   ├── StringUtils.java
+│   │   │           │   └── DateUtils.java
+│   │   │           │
+│   │   │           ├── scheduler/                     # Scheduled tasks
+│   │   │           │   ├── OrderStatusUpdateScheduler.java
+│   │   │           │   ├── PaymentReminderScheduler.java
+│   │   │           │   └── InventoryAlertScheduler.java
+│   │   │           │
+│   │   │           └── event/                         # Event handling
+│   │   │               ├── listener/
+│   │   │               │   ├── OrderEventListener.java
+│   │   │               │   ├── UserEventListener.java
+│   │   │               │   └── PaymentEventListener.java
+│   │   │               └── publisher/
+│   │   │                   ├── OrderEventPublisher.java
+│   │   │                   ├── UserEventPublisher.java
+│   │   │                   └── PaymentEventPublisher.java
+│   │   │
+│   │   └── resources/
+│   │       ├── application.yml              # Main application configuration
+│   │       ├── application-dev.yml          # Development environment configuration
+│   │       ├── application-prod.yml         # Production environment configuration
+│   │       ├── application-test.yml         # Test environment configuration
+│   │       ├── data.sql                     # Initial data script
+│   │       ├── banner.txt                   # Custom console banner
+│   │       ├── static/                      # Static resources
+│   │       │   └── uploads/                 # Upload directory
+│   │       └── templates/                   # Email templates
+│   │           ├── email/
+│   │           │   ├── welcome.html
+│   │           │   ├── order-confirmation.html
+│   │           │   ├── password-reset.html
+│   │           │   └── payment-confirmation.html
+│   │           └── pdf/
+│   │               ├── invoice.html
+│   │               └── shipping-label.html
+│   │
+│   └── test/                               # Unit and integration tests
+│       └── java/
+│           └── com/
+│               └── easykisan/
+│                   ├── controller/         # Controller tests
+│                   │   ├── AuthControllerTest.java
+│                   │   ├── ProductControllerTest.java
+│                   │   └── ...
+│                   ├── service/            # Service tests
+│                   │   ├── AuthServiceTest.java
+│                   │   ├── ProductServiceTest.java
+│                   │   └── ...
+│                   ├── repository/         # Repository tests
+│                   │   ├── UserRepositoryTest.java
+│                   │   ├── ProductRepositoryTest.java
+│                   │   └── ...
+│                   └── integration/        # Integration tests
+│                       ├── AuthIntegrationTest.java
+│                       ├── ProductIntegrationTest.java
+│                       └── ...
+│
+├── pom.xml                                # Maven dependencies and plugins
+├── .gitignore
+├── Dockerfile                             # Docker build file
+├── docker-compose.yml                     # Docker compose configuration
+├── README.md
+└── scripts/                               # Helper scripts
+    ├── start.sh
+    └── deploy.sh
+
+
+
+For the EasyKisan e-commerce platform, MySQL is the recommended database solution for the following reasons:
+
+Complex Relationships: The application has many interconnected entities (users, products, orders, etc.) that benefit from relational modeling
+ACID Compliance: Transactions for orders and payments require strong consistency
+Data Integrity: Foreign key constraints help maintain referential integrity
+Structured Data: The entities in the application have well-defined structures
+Reporting: SQL's querying capabilities are beneficial for analytics and reporting needs
+
+Database Schema Design
+User Management Tables
+sql-- Users table - Base table for all user types
+CREATE TABLE users (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    profile_image VARCHAR(255),
+    user_type ENUM('CUSTOMER', 'VENDOR', 'INFLUENCER', 'ADMIN') NOT NULL,
+    is_email_verified BOOLEAN DEFAULT FALSE,
+    verification_token VARCHAR(255),
+    reset_password_token VARCHAR(255),
+    reset_password_expires DATETIME,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Vendors table - Extended information for vendors
+CREATE TABLE vendors (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL UNIQUE,
+    business_name VARCHAR(255) NOT NULL,
+    business_description TEXT,
+    gstin VARCHAR(50),
+    pan VARCHAR(20),
+    business_address TEXT,
+    store_url VARCHAR(255) UNIQUE,
+    bank_account_number VARCHAR(50),
+    bank_name VARCHAR(100),
+    ifsc_code VARCHAR(20),
+    account_holder_name VARCHAR(255),
+    commission_rate DECIMAL(5,2) DEFAULT 5.00,
+    is_verified BOOLEAN DEFAULT FALSE,
+    total_sales DECIMAL(15,2) DEFAULT 0.00,
+    rating DECIMAL(3,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Influencers table - Extended information for influencers
+CREATE TABLE influencers (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL UNIQUE,
+    referral_code VARCHAR(50) NOT NULL UNIQUE,
+    bio TEXT,
+    social_media_links JSON,
+    total_earnings DECIMAL(15,2) DEFAULT 0.00,
+    commission_rate DECIMAL(5,2) DEFAULT 10.00,
+    bank_account_number VARCHAR(50),
+    bank_name VARCHAR(100),
+    ifsc_code VARCHAR(20),
+    account_holder_name VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Customer referrals tracking
+CREATE TABLE referrals (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    influencer_id BIGINT NOT NULL,
+    customer_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (influencer_id) REFERENCES influencers(id),
+    FOREIGN KEY (customer_id) REFERENCES users(id),
+    UNIQUE KEY (influencer_id, customer_id)
+);
+
+-- Address book for users
+CREATE TABLE addresses (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    address_line1 VARCHAR(255) NOT NULL,
+    address_line2 VARCHAR(255),
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    postal_code VARCHAR(20) NOT NULL,
+    country VARCHAR(100) NOT NULL DEFAULT 'India',
+    is_default BOOLEAN DEFAULT FALSE,
+    address_type ENUM('SHIPPING', 'BILLING', 'BOTH') DEFAULT 'BOTH',
+    recipient_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+Product Management Tables
+sql-- Categories
+CREATE TABLE categories (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    image_url VARCHAR(255),
+    parent_id BIGINT,
+    level INT NOT NULL DEFAULT 1,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (parent_id) REFERENCES categories(id)
+);
+
+-- Products
+CREATE TABLE products (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    vendor_id BIGINT NOT NULL,
+    category_id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    sku VARCHAR(100) UNIQUE,
+    price DECIMAL(15,2) NOT NULL,
+    sale_price DECIMAL(15,2),
+    cost_price DECIMAL(15,2),
+    quantity_available INT NOT NULL DEFAULT 0,
+    min_order_quantity INT DEFAULT 1,
+    is_featured BOOLEAN DEFAULT FALSE,
+    is_published BOOLEAN DEFAULT FALSE,
+    approval_status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
+    admin_remarks TEXT,
+    average_rating DECIMAL(3,2) DEFAULT 0,
+    total_reviews INT DEFAULT 0,
+    meta_title VARCHAR(255),
+    meta_description TEXT,
+    meta_keywords VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+-- Product variants (for different sizes, colors, etc.)
+CREATE TABLE product_variants (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    sku VARCHAR(100) UNIQUE,
+    attributes JSON NOT NULL, -- {"color": "red", "size": "XL"}
+    price_adjustment DECIMAL(15,2) DEFAULT 0.00,
+    quantity_available INT NOT NULL DEFAULT 0,
+    image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+-- Product images
+CREATE TABLE product_images (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    alt_text VARCHAR(255),
+    is_primary BOOLEAN DEFAULT FALSE,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+-- Product reviews
+CREATE TABLE reviews (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    order_id BIGINT,
+    rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment TEXT,
+    is_verified_purchase BOOLEAN DEFAULT FALSE,
+    status ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Product inventory history
+CREATE TABLE inventory_history (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    variant_id BIGINT,
+    previous_quantity INT NOT NULL,
+    new_quantity INT NOT NULL,
+    adjustment INT NOT NULL,
+    reason ENUM('PURCHASE', 'SALE', 'RETURN', 'ADJUSTMENT', 'DAMAGED') NOT NULL,
+    reference_id VARCHAR(255),
+    notes TEXT,
+    created_by BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (variant_id) REFERENCES product_variants(id) ON DELETE SET NULL,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+);
+Shopping Experience Tables
+sql-- Shopping cart
+CREATE TABLE carts (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT,
+    session_id VARCHAR(255), -- For guest users
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Cart items
+CREATE TABLE cart_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    cart_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    variant_id BIGINT,
+    quantity INT NOT NULL DEFAULT 1,
+    price_at_addition DECIMAL(15,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (variant_id) REFERENCES product_variants(id) ON DELETE SET NULL
+);
+
+-- Wishlist
+CREATE TABLE wishlists (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Wishlist items
+CREATE TABLE wishlist_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    wishlist_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (wishlist_id) REFERENCES wishlists(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    UNIQUE KEY (wishlist_id, product_id)
+);
+
+-- Promotional banners
+CREATE TABLE banners (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url VARCHAR(255) NOT NULL,
+    link_url VARCHAR(255),
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    position ENUM('HOME_TOP', 'HOME_MIDDLE', 'CATEGORY_PAGE', 'PRODUCT_PAGE') NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Coupon codes
+CREATE TABLE coupons (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    description TEXT,
+    discount_type ENUM('PERCENTAGE', 'FIXED') NOT NULL,
+    discount_value DECIMAL(15,2) NOT NULL,
+    min_purchase_amount DECIMAL(15,2),
+    max_discount_amount DECIMAL(15,2),
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    usage_limit INT,
+    usage_count INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+Order Management Tables
+sql-- Orders
+CREATE TABLE orders (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT,
+    order_number VARCHAR(50) NOT NULL UNIQUE,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED') DEFAULT 'PENDING',
+    shipping_address_id BIGINT,
+    billing_address_id BIGINT,
+    subtotal DECIMAL(15,2) NOT NULL,
+    shipping_cost DECIMAL(15,2) DEFAULT 0.00,
+    tax_amount DECIMAL(15,2) DEFAULT 0.00,
+    discount_amount DECIMAL(15,2) DEFAULT 0.00,
+    total_amount DECIMAL(15,2) NOT NULL,
+    coupon_code VARCHAR(50),
+    payment_status ENUM('PENDING', 'PAID', 'FAILED', 'REFUNDED') DEFAULT 'PENDING',
+    influencer_id BIGINT,
+    notes TEXT,
+    tracking_number VARCHAR(100),
+    shipping_method VARCHAR(100),
+    expected_delivery_date DATE,
+    actual_delivery_date DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (shipping_address_id) REFERENCES addresses(id) ON DELETE SET NULL,
+    FOREIGN KEY (billing_address_id) REFERENCES addresses(id) ON DELETE SET NULL,
+    FOREIGN KEY (influencer_id) REFERENCES influencers(id) ON DELETE SET NULL
+);
+
+-- Order items
+CREATE TABLE order_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    product_variant_id BIGINT,
+    vendor_id BIGINT NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    product_sku VARCHAR(100) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(15,2) NOT NULL,
+    tax_amount DECIMAL(15,2) DEFAULT 0.00,
+    discount_amount DECIMAL(15,2) DEFAULT 0.00,
+    total DECIMAL(15,2) NOT NULL,
+    status ENUM('PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED') DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE NO ACTION,
+    FOREIGN KEY (product_variant_id) REFERENCES product_variants(id) ON DELETE SET NULL,
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE NO ACTION
+);
+
+-- Order status history
+CREATE TABLE order_status_history (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    status ENUM('PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED') NOT NULL,
+    comment TEXT,
+    updated_by BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Payments
+CREATE TABLE payments (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    payment_method ENUM('CREDIT_CARD', 'DEBIT_CARD', 'UPI', 'NET_BANKING', 'WALLET', 'COD') NOT NULL,
+    payment_reference VARCHAR(255),
+    amount DECIMAL(15,2) NOT NULL,
+    currency VARCHAR(10) DEFAULT 'INR',
+    status ENUM('PENDING', 'COMPLETED', 'FAILED', 'REFUNDED', 'PARTIALLY_REFUNDED') DEFAULT 'PENDING',
+    transaction_id VARCHAR(255),
+    payment_provider VARCHAR(100),
+    provider_response JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Refunds
+CREATE TABLE refunds (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    payment_id BIGINT NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    reason TEXT NOT NULL,
+    status ENUM('PENDING', 'APPROVED', 'PROCESSED', 'REJECTED') DEFAULT 'PENDING',
+    refund_reference VARCHAR(255),
+    processed_by BIGINT,
+    processed_at DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (payment_id) REFERENCES payments(id) ON DELETE CASCADE,
+    FOREIGN KEY (processed_by) REFERENCES users(id) ON DELETE SET NULL
+);
+Financial Management Tables
+sql-- Vendor earnings
+CREATE TABLE vendor_earnings (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    vendor_id BIGINT NOT NULL,
+    order_item_id BIGINT NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    commission_amount DECIMAL(15,2) NOT NULL,
+    net_amount DECIMAL(15,2) NOT NULL,
+    status ENUM('PENDING', 'RELEASED', 'PAID', 'CANCELLED') DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE CASCADE,
+    FOREIGN KEY (order_item_id) REFERENCES order_items(id) ON DELETE CASCADE
+);
+
+-- Influencer earnings
+CREATE TABLE influencer_earnings (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    influencer_id BIGINT NOT NULL,
+    order_id BIGINT NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    commission_rate DECIMAL(5,2) NOT NULL,
+    status ENUM('PENDING', 'RELEASED', 'PAID', 'CANCELLED') DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (influencer_id) REFERENCES influencers(id) ON DELETE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
+-- Withdrawal requests
+CREATE TABLE withdrawals (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    status ENUM('PENDING', 'APPROVED', 'REJECTED', 'PROCESSED') DEFAULT 'PENDING',
+    user_type ENUM('VENDOR', 'INFLUENCER') NOT NULL,
+    payment_method ENUM('BANK_TRANSFER', 'UPI', 'PAYPAL', 'OTHER') NOT NULL,
+    payment_details JSON,
+    reference_number VARCHAR(255),
+    processed_by BIGINT,
+    processed_at DATETIME,
+    remarks TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (processed_by) REFERENCES users(id) ON DELETE SET NULL
+);
+Communication and Notification Tables
+sql-- Notifications
+CREATE TABLE notifications (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT,
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    type ENUM('SYSTEM', 'ORDER', 'PAYMENT', 'PRODUCT', 'WITHDRAWAL', 'OTHER') NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    reference_id VARCHAR(255),
+    reference_type VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Email templates
+CREATE TABLE email_templates (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    subject VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    variables JSON,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Email logs
+CREATE TABLE email_logs (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT,
+    email_to VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    template_id BIGINT,
+    status ENUM('SENT', 'FAILED', 'BOUNCED', 'DELIVERED') NOT NULL,
+    error_message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (template_id) REFERENCES email_templates(id) ON DELETE SET NULL
+);
+
+-- SMS templates
+CREATE TABLE sms_templates (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    content TEXT NOT NULL,
+    variables JSON,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- SMS logs
+CREATE TABLE sms_logs (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT,
+    phone_number VARCHAR(20) NOT NULL,
+    template_id BIGINT,
+    status ENUM('SENT', 'FAILED', 'DELIVERED') NOT NULL,
+    error_message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (template_id) REFERENCES sms_templates(id) ON DELETE SET NULL
+);
+System Configuration Tables
+sql-- Application settings
+CREATE TABLE app_settings (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    setting_key VARCHAR(100) NOT NULL UNIQUE,
+    setting_value TEXT,
+    data_type ENUM('STRING', 'NUMBER', 'BOOLEAN', 'JSON') NOT NULL DEFAULT 'STRING',
+    category VARCHAR(100) NOT NULL DEFAULT 'GENERAL',
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- API logs
+CREATE TABLE api_logs (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    endpoint VARCHAR(255) NOT NULL,
+    method VARCHAR(10) NOT NULL,
+    request_headers TEXT,
+    request_body TEXT,
+    response_status INT,
+    response_body TEXT,
+    ip_address VARCHAR(45),
+    user_id BIGINT,
+    execution_time INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- User activity logs
+CREATE TABLE user_activity_logs (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT,
+    action VARCHAR(255) NOT NULL,
+    entity_type VARCHAR(100),
+    entity_id VARCHAR(100),
+    old_value TEXT,
+    new_value TEXT,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+Key Database Design Considerations
+
+User Roles: The system supports multiple user types (customers, vendors, influencers, admins) with role-specific data in separate tables.
+Indexing Strategy:
+
+Primary keys are auto-increment BIGINT for scalability
+Foreign keys are indexed for faster joins
+Commonly searched fields (emails, codes, order numbers) have unique indexes
+
+
+Multi-level Categories: The category structure supports hierarchical product categorization.
+Product Variants: Support for different product variations (size, color, etc.).
+Commission Structure:
+
+Platform earns 5% commission on product sales
+Influencers earn 10% commission on referred sales
+
+
+Order Management: Comprehensive tracking of order status, history, and fulfillment.
+Financial Management: Separate tracking of vendor and influencer earnings with withdrawal system.
+Audit Trail: Activity logs for user actions and system changes.
+Timestamps: All tables include created_at and updated_at for tracking changes.
+Soft Deletes: Active/inactive flags instead of hard deletes where appropriate.
+
+Database Initial Setup Script
+sql-- Create the database
+CREATE DATABASE easykisan_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Use the database
+USE easykisan_db;
+
+-- Create all tables (using the table creation scripts above)
+
+-- Insert initial data
+INSERT INTO app_settings (setting_key, setting_value, data_type, category, description)
+VALUES 
+('SITE_NAME', 'easybusy', 'STRING', 'GENERAL', 'Site name'),
+('SITE_LOGO', '/assets/images/logo.png', 'STRING', 'GENERAL', 'Site logo path'),
+('CONTACT_EMAIL', 'support@easybusy.com', 'STRING', 'CONTACT', 'Support email address'),
+('CONTACT_PHONE', '+91-9999999999', 'STRING', 'CONTACT', 'Support phone number'),
+('VENDOR_COMMISSION_RATE', '5.00', 'NUMBER', 'FINANCE', 'Default commission rate for vendors (%)'),
+('INFLUENCER_COMMISSION_RATE', '10.00', 'NUMBER', 'FINANCE', 'Default commission rate for influencers (%)'),
+('MIN_WITHDRAWAL_AMOUNT', '1000.00', 'NUMBER', 'FINANCE', 'Minimum withdrawal amount');
+
+-- Create admin user
+INSERT INTO users (email, password, full_name, user_type, is_email_verified, is_active) 
+VALUES ('admin@easybusy.com', '$2a$10$hKDVYxLefVHV/vtuPhWD3OigtRyOykRLDdUAp80Z1crSoS1lFqaFS', 'Admin User', 'ADMIN', TRUE, TRUE);
+Additional Database Optimizations
+
+Partitioning for large tables: Consider partitioning tables like orders and order_items by date ranges.
+Archiving strategy: Implement an archiving strategy for old orders and other historical data.
+Replication and clustering: For high availability and read scaling, implement MySQL replication.
+Performance monitoring: Set up monitoring tools to track query performance and database health.
+Backup strategy: Implement regular backups with point-in-time recovery capabilities.
+
+
+
+
+defination below
+
+
+
+1. Splash Screen
+Functionality:
+
+Displays the app logo and branding.
+
+After a brief display, transitions to the login/registration screen.
+
+2. Login / Registration Screen
+Functionality:
+
+Login: User login with email/password or social media logins (Google, Facebook, etc.).
+
+Registration:
+
+Option to register as a vendor, influencer, or customer.
+
+Email verification after registration.
+
+Collect details like name, email, password, and role (user type).
+
+3. Home Screen
+Functionality:
+
+Product Categories: Display various product categories (Clothing, Electronics, etc.).
+
+Featured Products: Showcase top-selling or promoted products.
+
+Search Bar: Allow users to search for products.
+
+User Account: Link to view account settings and order history.
+
+Banner Ads: Display promotions, offers, or sales.
+
+4. Product Listing Screen
+Functionality:
+
+Filter Products: Filter by category, price range, brand, etc.
+
+Sort Options: Sort by price, popularity, or ratings.
+
+Product Grid: Display products with images, names, prices, and basic details.
+
+Quick View: Preview product details without leaving the screen.
+
+Add to Cart: Option to add products to the shopping cart.
+
+5. Product Detail Screen
+Functionality:
+
+Product Images: High-quality images with zoom feature.
+
+Product Information: Product description, specifications, sizes/colors available.
+
+Customer Reviews: User reviews and ratings for products.
+
+Add to Cart: Button to add the product to the cart.
+
+Shipping Info: Shipping options and estimated delivery.
+
+Related Products: Suggest similar or complementary products.
+
+6. Cart Screen
+Functionality:
+
+View Cart Items: Display the products added to the cart with quantity and price.
+
+Update Quantity: Change product quantities in the cart.
+
+Remove Item: Option to remove a product.
+
+Apply Coupons: Option to enter discount codes.
+
+Proceed to Checkout: Button to move to the checkout screen.
+
+Estimated Total: Display total cost including taxes and shipping.
+
+7. Checkout Screen
+Functionality:
+
+Billing Address: Input and save shipping address.
+
+Payment Methods: Options for card payment, UPI, or COD.
+
+Order Review: Final review of products, quantities, and total amount.
+
+Promo Code: Option to apply promo codes for discounts.
+
+Place Order: Button to confirm the order.
+
+Order Summary: Summary of the order and shipping details.
+
+8. Order Confirmation Screen
+Functionality:
+
+Order ID: Display unique order ID for tracking.
+
+Order Details: Show summary of products purchased.
+
+Shipping Details: Shipping address and delivery estimate.
+
+Track Order: Option to track the order status in real-time.
+
+9. User Account Dashboard (Customer)
+Functionality:
+
+Personal Information: View and edit name, email, etc.
+
+Order History: View past orders, with their status (Completed, Pending).
+
+Saved Addresses: Manage shipping addresses.
+
+Wishlist: Save products for future purchases.
+
+Account Settings: Change email, password, payment methods.
+
+Logout: Log out of the account.
+
+10. Influencer Dashboard
+Functionality:
+
+Earnings Overview: View total earnings from referral codes.
+
+Referral Code: Display unique referral code for sharing with followers.
+
+Commission Tracking: Track commissions earned from referred customers.
+
+Referral Link: Option to share referral links and codes.
+
+Payment History: View history of payments received.
+
+Withdrawal Request: Option to withdraw earnings via bank transfer, UPI, etc.
+
+11. Vendor Dashboard
+Functionality:
+
+Product Management: Add, edit, delete products, and manage product details.
+
+Inventory Management: Update stock levels as products are sold.
+
+Order Management: View and manage customer orders.
+
+Sales Overview: View total sales, stock sold, and remaining inventory.
+
+Payment History: View payouts received for product sales.
+
+Withdrawal Request: Request payout for earnings.
+
+Shipping Info: Manage shipping options for products.
+
+12. Admin Dashboard (Platform Owner)
+Functionality:
+
+User Management: View and manage user accounts (customers, vendors, influencers).
+
+Order Management: View and process all orders.
+
+Product Listings: Approve or reject product listings from vendors.
+
+Commission Reports: Track influencer commissions and product sales.
+
+Revenue Overview: Monitor platform revenue from product sales and commissions.
+
+System Settings: Configure platform settings such as payment methods, shipping, and tax rules.
+
+Promotions: Manage special offers, discounts, and coupon codes.
+
+13. Withdrawal Screen (For Influencers and Vendors)
+Functionality:
+
+Current Earnings: Show available balance for withdrawal.
+
+Withdrawal Method: Select the preferred method (Bank transfer, UPI, PayPal, etc.).
+
+Withdrawal Amount: Input the amount to withdraw.
+
+Transaction Fee: Display withdrawal fees, if any.
+
+Request Confirmation: Confirm withdrawal request.
+
+Payment History: View past withdrawals (approved, pending, or failed).
+
+14. Order Tracking Screen
+Functionality:
+
+Track Order by ID: Input order ID to track the status of the order.
+
+Order Status: Show the current status of the order (processing, shipped, delivered).
+
+Tracking Information: Display tracking number and courier details.
+
+15. Contact Us / Support Screen
+Functionality:
+
+Support Ticket: Allow users to create a support ticket for issues with orders or accounts.
+
+Live Chat: Instant messaging for customer support.
+
+FAQs: Display frequently asked questions to help users resolve common issues.
+
+Contact Details: Provide platform contact information for support.
+
+16. Terms & Conditions / Privacy Policy Screen
+Functionality:
+
+Legal Information: Show terms of service and privacy policy.
+
+Consent: Checkbox to agree to terms before registering or placing an order.
+
+17. Product Listing / Inventory Management Screens for Vendors
+Functionality:
+
+Add New Product: Button to add new products.
+
+Edit Product: Modify existing product details (price, description, stock).
+
+Update Stock: Option to update inventory as new stock arrives.
+
+Delete Product: Option to remove a product.
+
+Bulk Upload: Upload products in bulk (CSV or Excel).
+
+Low Stock Alerts: Alert vendors when stock is low.
+
+18. Admin Order Listing Screen
+Functionality:
+
+Filter & Sort Orders: By order status, date, payment, etc.
+
+Order Details: View customer details, order history, payment info.
+
+Change Order Status: Mark as shipped, delivered, canceled.
+
+Manage Payments: Confirm payment status, or mark as failed.
+
+Shipping Details: View or update shipping information.
+
+19. Admin Inventory Management Screen
+Functionality:
+
+Manage Products: View all products listed on the platform.
+
+Approve or Reject Listings: Approve/reject product listings submitted by vendors.
+
+Track Product Sales: See sales data for all listed products.
+
+Manage Vendors: Review and manage vendor details and products.
+
+Product Category Management: Categorize and manage product categories.
+
+20. Admin Promotions Screen
+Functionality:
+
+Create and Manage Discounts: Set up discount codes for customers.
+
+Create and Manage Promo Banners: Set up banners on the homepage for special offers.
+
+
+
+Key Features of Your Idea:
+Collaboration with Manufacturers: You will partner with manufacturers who will sell products at the same price as they would on Amazon, but the condition is that they add your platform’s branding/logo to the products. This gives you a unique identity in the market.
+
+Influencer Marketing: You’ll collaborate with influencers who will promote your brand. Influencers will have access to a unique tracking tool to monitor their sales and earn a 10% commission on sales made using their referral code.
+
+Platform Management: You will handle the entire process of order management, customer service, shipping, and delivery through partnerships with logistics providers.
+
+Vendor Management: Vendors can list their products on your platform, and you will manage the process, including inventory and order management.
+
+Monetization Strategy:
+
+Sales Commission: You will earn a 5% commission on every product sold on the platform.
+
+Influencer Commission: You will pay influencers 10% commission for sales through their referral code.
+
+Revenue from Advertisements: You can add revenue by featuring certain products or running platform-wide ads
+====================================
+
