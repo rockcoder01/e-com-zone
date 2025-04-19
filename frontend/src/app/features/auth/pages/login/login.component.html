@@ -1,0 +1,81 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1 class="auth-title">Sign In</h1>
+      <p class="auth-subtitle">Welcome back to EasyBusy. Please sign in to continue.</p>
+    </div>
+
+    <!-- Error Alert -->
+    <div *ngIf="error$ | async as errorMsg" class="error-alert">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMsg }}</span>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <!-- Username/Email Field -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Username or Email</mat-label>
+        <input 
+          matInput 
+          formControlName="usernameOrEmail" 
+          placeholder="Enter your username or email"
+          autocomplete="username"
+        >
+        <mat-icon matPrefix>person</mat-icon>
+        <mat-error *ngIf="loginForm.get('usernameOrEmail')?.invalid">
+          {{ getErrorMessage('usernameOrEmail') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password Field -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Password</mat-label>
+        <input 
+          matInput 
+          [type]="hidePassword ? 'password' : 'text'" 
+          formControlName="password" 
+          placeholder="Enter your password"
+          autocomplete="current-password"
+        >
+        <mat-icon matPrefix>lock</mat-icon>
+        <button 
+          mat-icon-button 
+          matSuffix 
+          (click)="hidePassword = !hidePassword" 
+          [attr.aria-label]="'Hide password'" 
+          [attr.aria-pressed]="hidePassword"
+          type="button"
+        >
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')?.invalid">
+          {{ getErrorMessage('password') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Remember Me Checkbox -->
+      <div class="form-field-row">
+        <mat-checkbox formControlName="rememberMe" color="primary">
+          Remember me
+        </mat-checkbox>
+        <a routerLink="/auth/forgot-password" class="forgot-password-link">Forgot password?</a>
+      </div>
+
+      <!-- Submit Button -->
+      <button 
+        mat-flat-button 
+        color="primary" 
+        type="submit" 
+        class="submit-button"
+        [disabled]="loginForm.invalid || (loading$ | async)"
+      >
+        <mat-spinner diameter="20" *ngIf="loading$ | async"></mat-spinner>
+        <span *ngIf="!(loading$ | async)">Sign In</span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Don't have an account? <a routerLink="/auth/register">Create account</a></p>
+    </div>
+  </div>
+</div>

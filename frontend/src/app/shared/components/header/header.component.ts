@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../../store/app.state';
-import { selectCurrentUser, selectIsAuthenticated } from '../../../store/reducers/auth.reducer';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+
 import { User } from '../../../models/user.model';
-import { logout } from '../../../store/actions/auth.actions';
+import { AuthService } from '../../../core/services/auth.service';
+import { AppState } from '../../../store/app.state';
+import * as AuthActions from '../../../store/actions/auth.actions';
+import * as fromAuth from '../../../store/reducers/auth.reducer';
 
 @Component({
   selector: 'app-header',
@@ -15,23 +18,34 @@ import { logout } from '../../../store/actions/auth.actions';
 export class HeaderComponent implements OnInit {
   isAuthenticated$: Observable<boolean>;
   currentUser$: Observable<User | null>;
-  
+  cartItemCount$: Observable<number>;
+
   constructor(
     private store: Store<AppState>,
+    private authService: AuthService,
     private router: Router
   ) {
-    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
-    this.currentUser$ = this.store.select(selectCurrentUser);
+    this.isAuthenticated$ = this.store.select(
+      state => state.auth.isAuthenticated
+    );
+    
+    this.currentUser$ = this.store.select(
+      state => state.auth.user
+    );
+    
+    this.cartItemCount$ = this.store.select(
+      state => state.cart.totalItems
+    );
   }
 
   ngOnInit(): void {}
 
   onLogout(): void {
-    this.store.dispatch(logout());
+    this.store.dispatch(AuthActions.logout());
   }
 
   navigateToProfile(): void {
-    this.router.navigate(['/user/profile']);
+    this.router.navigate(['/account/profile']);
   }
 
   navigateToCart(): void {
@@ -39,6 +53,6 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToWishlist(): void {
-    this.router.navigate(['/user/wishlist']);
+    this.router.navigate(['/account/wishlist']);
   }
 }

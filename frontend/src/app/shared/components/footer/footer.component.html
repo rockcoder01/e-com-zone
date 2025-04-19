@@ -1,63 +1,110 @@
 <footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-section about">
-        <h3>EasyBusy</h3>
-        <p>Your one-stop shop for all your shopping needs. Quality products, competitive prices, and exceptional service.</p>
-        <div class="social-links">
-          <a href="#" class="social-link"><mat-icon>facebook</mat-icon></a>
-          <a href="#" class="social-link"><mat-icon>twitter</mat-icon></a>
-          <a href="#" class="social-link"><mat-icon>instagram</mat-icon></a>
-          <a href="#" class="social-link"><mat-icon>youtube</mat-icon></a>
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-content">
+        <!-- Newsletter Signup -->
+        <div class="footer-newsletter">
+          <h3 class="footer-heading">Stay Connected</h3>
+          <p>Subscribe to our newsletter for updates, promotions, and more.</p>
+          
+          <form class="newsletter-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input matInput type="email" placeholder="Enter your email">
+            </mat-form-field>
+            <button mat-flat-button color="primary">Subscribe</button>
+          </form>
+          
+          <!-- Social Media Links -->
+          <div class="social-links">
+            <a href="#" target="_blank" aria-label="Facebook">
+              <mat-icon>facebook</mat-icon>
+            </a>
+            <a href="#" target="_blank" aria-label="Twitter">
+              <mat-icon>twitter</mat-icon>
+            </a>
+            <a href="#" target="_blank" aria-label="Instagram">
+              <mat-icon>instagram</mat-icon>
+            </a>
+            <a href="#" target="_blank" aria-label="YouTube">
+              <mat-icon>youtube</mat-icon>
+            </a>
+            <a href="#" target="_blank" aria-label="Pinterest">
+              <mat-icon>pinterest</mat-icon>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Footer Links -->
+        <div class="footer-links">
+          <div class="footer-links-column">
+            <h3 class="footer-heading">Company</h3>
+            <ul>
+              <li *ngFor="let link of companyLinks">
+                <a [routerLink]="link.url">{{ link.name }}</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="footer-links-column">
+            <h3 class="footer-heading">Shop</h3>
+            <ul>
+              <li *ngFor="let link of shopLinks">
+                <a [routerLink]="link.url">{{ link.name }}</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="footer-links-column">
+            <h3 class="footer-heading">Help</h3>
+            <ul>
+              <li *ngFor="let link of helpLinks">
+                <a [routerLink]="link.url">{{ link.name }}</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="footer-links-column">
+            <h3 class="footer-heading">Policies</h3>
+            <ul>
+              <li *ngFor="let link of policyLinks">
+                <a [routerLink]="link.url">{{ link.name }}</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       
-      <div class="footer-section links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/products">Shop</a></li>
-          <li><a routerLink="/about">About Us</a></li>
-          <li><a routerLink="/contact">Contact</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section links">
-        <h3>Customer Service</h3>
-        <ul>
-          <li><a routerLink="/faq">FAQ</a></li>
-          <li><a routerLink="/shipping">Shipping & Returns</a></li>
-          <li><a routerLink="/privacy">Privacy Policy</a></li>
-          <li><a routerLink="/terms">Terms & Conditions</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section contact">
-        <h3>Contact Us</h3>
-        <ul class="contact-info">
-          <li>
-            <mat-icon>location_on</mat-icon>
-            <span>123 Main Street, City, Country</span>
-          </li>
-          <li>
-            <mat-icon>phone</mat-icon>
-            <span>+1 234 567 8900</span>
-          </li>
-          <li>
-            <mat-icon>email</mat-icon>
-            <span>support@easybusy.com</span>
-          </li>
-        </ul>
+      <!-- Payment Methods -->
+      <div class="payment-methods">
+        <h3 class="footer-heading">We Accept</h3>
+        <div class="payment-icons">
+          <img src="assets/images/payment/visa.svg" alt="Visa">
+          <img src="assets/images/payment/mastercard.svg" alt="Mastercard">
+          <img src="assets/images/payment/amex.svg" alt="American Express">
+          <img src="assets/images/payment/paypal.svg" alt="PayPal">
+          <img src="assets/images/payment/apple-pay.svg" alt="Apple Pay">
+          <img src="assets/images/payment/google-pay.svg" alt="Google Pay">
+        </div>
       </div>
     </div>
-    
-    <div class="footer-bottom">
-      <div class="copyright">
-        <p>&copy; {{ currentYear }} EasyBusy. All rights reserved.</p>
-      </div>
-      <div class="payment-methods">
-        <span>We accept:</span>
-        <img src="assets/images/payment-methods.png" alt="Payment Methods">
+  </div>
+  
+  <!-- Copyright Bar -->
+  <div class="copyright-bar">
+    <div class="container">
+      <div class="copyright-content">
+        <div class="copyright-text">
+          &copy; {{ currentYear }} EasyBusy. All rights reserved.
+        </div>
+        <div class="app-links">
+          <a href="#" target="_blank">
+            <img src="assets/images/app-store.svg" alt="Download on the App Store">
+          </a>
+          <a href="#" target="_blank">
+            <img src="assets/images/google-play.svg" alt="Get it on Google Play">
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import { AppState } from './store/app.state';
-import { getCurrentUser } from './store/actions/auth.actions';
-import { selectIsAuthenticated } from './store/reducers/auth.reducer';
+import * as AuthActions from './store/actions/auth.actions';
+import * as CartActions from './store/actions/cart.actions';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +17,20 @@ export class AppComponent implements OnInit {
   isAuthenticated$: Observable<boolean>;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private authService: AuthService
   ) {
-    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
+    this.isAuthenticated$ = this.store.select(state => state.auth.isAuthenticated);
   }
 
   ngOnInit(): void {
-    // Try to auto-login if there's an existing token
-    this.store.dispatch(getCurrentUser());
+    // Check if user is already authenticated (token exists in localStorage)
+    if (this.authService.isAuthenticated()) {
+      // Load user profile
+      this.store.dispatch(AuthActions.loadUserProfile());
+      
+      // Load cart items
+      this.store.dispatch(CartActions.loadCart());
+    }
   }
 }

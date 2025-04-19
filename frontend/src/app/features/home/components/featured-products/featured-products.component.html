@@ -1,0 +1,57 @@
+<div class="featured-products-grid">
+  <ng-container *ngIf="products && products.length > 0; else noProducts">
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-image-container">
+        <a [routerLink]="['/products', product.id]">
+          <img [src]="product.images && product.images.length ? product.images[0] : 'assets/images/product-placeholder.jpg'" 
+               [alt]="product.name" 
+               class="product-image">
+          
+          <!-- Discount Badge -->
+          <span class="discount-badge" *ngIf="product.originalPrice && product.originalPrice > product.price">
+            -{{ calculateDiscountPercentage(product.originalPrice, product.price) }}%
+          </span>
+        </a>
+        
+        <!-- Quick Actions -->
+        <div class="product-actions">
+          <button mat-mini-fab color="primary" (click)="addToCart(product, $event)" matTooltip="Add to Cart">
+            <mat-icon>shopping_cart</mat-icon>
+          </button>
+        </div>
+      </div>
+      
+      <div class="product-info">
+        <h3 class="product-name">
+          <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+        </h3>
+        
+        <div class="product-rating">
+          <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]" 
+                    [class.filled]="i <= product.rating">star</mat-icon>
+          <span class="rating-count">({{ product.reviewCount }})</span>
+        </div>
+        
+        <div class="product-price">
+          <span class="current-price">${{ product.price.toFixed(2) }}</span>
+          <span class="original-price" *ngIf="product.originalPrice && product.originalPrice > product.price">
+            ${{ product.originalPrice.toFixed(2) }}
+          </span>
+        </div>
+        
+        <div class="stock-status" *ngIf="product.stock <= 5 && product.stock > 0">
+          Only {{ product.stock }} left in stock!
+        </div>
+        <div class="out-of-stock" *ngIf="product.stock === 0">
+          Out of Stock
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-template #noProducts>
+    <div class="no-products">
+      <p>No products available at the moment. Check back soon!</p>
+    </div>
+  </ng-template>
+</div>

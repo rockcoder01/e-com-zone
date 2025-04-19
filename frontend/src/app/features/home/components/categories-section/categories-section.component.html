@@ -1,0 +1,17 @@
+<div class="categories-section">
+  <h2 class="section-title">Shop by Category</h2>
+  
+  <div class="categories-grid">
+    <div class="category-card" *ngFor="let category of categories">
+      <a [routerLink]="['/categories', category.slug]" class="category-link">
+        <div class="category-image-container">
+          <img [src]="category.imageUrl" [alt]="category.name" class="category-image">
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">{{ category.name }}</h3>
+          <p class="category-count">{{ category.itemCount }} Products</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

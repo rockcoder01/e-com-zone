@@ -1,5 +1,6 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
+
 import { AppState } from '../app.state';
 import { authReducer } from './auth.reducer';
 import { productReducer } from './product.reducer';

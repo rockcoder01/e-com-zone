@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { User } from '../../models/user.model';
 import * as AuthActions from '../actions/auth.actions';
+import { User } from '../../models/user.model';
 
 export interface AuthState {
   user: User | null;
@@ -20,11 +20,14 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(AuthActions.login, (state) => ({
+  
+  // Login
+  on(AuthActions.login, state => ({
     ...state,
     loading: true,
     error: null
   })),
+  
   on(AuthActions.loginSuccess, (state, { user, token }) => ({
     ...state,
     user,
@@ -33,46 +36,96 @@ export const authReducer = createReducer(
     loading: false,
     error: null
   })),
+  
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
   })),
-  on(AuthActions.register, (state) => ({
+  
+  // Register
+  on(AuthActions.register, state => ({
     ...state,
     loading: true,
     error: null
   })),
-  on(AuthActions.registerSuccess, (state) => ({
+  
+  on(AuthActions.registerSuccess, state => ({
     ...state,
     loading: false,
     error: null
   })),
+  
   on(AuthActions.registerFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
   })),
-  on(AuthActions.logout, (state) => ({
+  
+  // Logout
+  on(AuthActions.logout, state => ({
     ...state,
-    loading: true,
-    error: null
+    loading: true
   })),
-  on(AuthActions.logoutSuccess, () => ({
+  
+  on(AuthActions.logoutSuccess, state => ({
     ...initialState
   })),
-  on(AuthActions.loadUserProfile, (state) => ({
+  
+  // User Profile
+  on(AuthActions.loadUserProfile, state => ({
     ...state,
     loading: true,
     error: null
   })),
+  
   on(AuthActions.loadUserProfileSuccess, (state, { user }) => ({
     ...state,
     user,
     loading: false,
     error: null
   })),
+  
   on(AuthActions.loadUserProfileFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error
+  })),
+  
+  // Update User Profile
+  on(AuthActions.updateUserProfile, state => ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+  
+  on(AuthActions.updateUserProfileSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    loading: false,
+    error: null
+  })),
+  
+  on(AuthActions.updateUserProfileFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error
+  })),
+  
+  // Change Password
+  on(AuthActions.changePassword, state => ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+  
+  on(AuthActions.changePasswordSuccess, state => ({
+    ...state,
+    loading: false,
+    error: null
+  })),
+  
+  on(AuthActions.changePasswordFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error

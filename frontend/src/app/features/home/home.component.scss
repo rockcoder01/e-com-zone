@@ -1,0 +1,52 @@
+.home-container {
+  margin-bottom: 32px;
+}
+
+.section {
+  padding: 40px 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+}
+
+.featured-products-section {
+  background-color: #f9f9f9;
+}
+
+.view-all-container {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.promotions-section {
+  background-color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .section {
+    padding: 32px 0;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+}

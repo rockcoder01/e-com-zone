@@ -1,47 +1,67 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="header-toolbar">
   <div class="container">
-    <div class="toolbar-content">
-      <div class="logo-container">
-        <a routerLink="/" class="logo">
-          <span>EasyBusy</span>
+    <div class="header-wrapper">
+      <!-- Logo and Brand Name -->
+      <div class="brand">
+        <a routerLink="/" class="brand-link">
+          <span class="brand-name">EasyBusy</span>
         </a>
       </div>
-      
-      <div class="search-container">
-        <mat-form-field appearance="outline" class="search-field">
-          <input matInput placeholder="Search products..." type="search">
+
+      <!-- Search Box -->
+      <div class="search-box">
+        <mat-form-field appearance="outline" class="search-form-field">
+          <input matInput placeholder="Search products..." name="search">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
       </div>
-      
+
+      <!-- Navigation Links -->
       <div class="nav-links">
-        <ng-container *ngIf="!(isAuthenticated$ | async); else authenticatedNav">
-          <button mat-button routerLink="/auth/login">Login</button>
-          <button mat-raised-button color="accent" routerLink="/auth/register">Register</button>
-        </ng-container>
-        
-        <ng-template #authenticatedNav>
-          <button mat-icon-button routerLink="/cart" matTooltip="Cart">
-            <mat-icon>shopping_cart</mat-icon>
-          </button>
-          
-          <button mat-icon-button (click)="navigateToWishlist()" matTooltip="Wishlist">
-            <mat-icon>favorite</mat-icon>
-          </button>
-          
-          <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
-            <span *ngIf="currentUser$ | async as user">{{ user.firstName }}</span>
+        <a routerLink="/products" mat-button>Products</a>
+        <a routerLink="/categories" mat-button>Categories</a>
+        <a routerLink="/deals" mat-button>Deals</a>
+      </div>
+
+      <!-- User Actions -->
+      <div class="user-actions">
+        <!-- Cart Button -->
+        <button mat-icon-button aria-label="Shopping cart" (click)="navigateToCart()">
+          <mat-icon [matBadge]="(cartItemCount$ | async) || 0" 
+                   matBadgeColor="accent" 
+                   matBadgeSize="small"
+                   [matBadgeHidden]="(cartItemCount$ | async) === 0">
+            shopping_cart
+          </mat-icon>
+        </button>
+
+        <!-- Wishlist Button (shown only if authenticated) -->
+        <button *ngIf="isAuthenticated$ | async" 
+                mat-icon-button 
+                aria-label="Wishlist" 
+                (click)="navigateToWishlist()">
+          <mat-icon>favorite</mat-icon>
+        </button>
+
+        <!-- User Menu -->
+        <ng-container *ngIf="isAuthenticated$ | async; else unauthenticated">
+          <button mat-button [matMenuTriggerFor]="userMenu">
             <mat-icon>account_circle</mat-icon>
+            {{ (currentUser$ | async)?.firstName }}
+            <mat-icon>arrow_drop_down</mat-icon>
           </button>
-          
           <mat-menu #userMenu="matMenu">
             <button mat-menu-item (click)="navigateToProfile()">
               <mat-icon>person</mat-icon>
               <span>My Profile</span>
             </button>
-            <button mat-menu-item routerLink="/user/orders">
-              <mat-icon>shopping_bag</mat-icon>
+            <button mat-menu-item routerLink="/account/orders">
+              <mat-icon>list_alt</mat-icon>
               <span>My Orders</span>
+            </button>
+            <button mat-menu-item routerLink="/account/addresses">
+              <mat-icon>location_on</mat-icon>
+              <span>My Addresses</span>
             </button>
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="onLogout()">
@@ -49,22 +69,49 @@
               <span>Logout</span>
             </button>
           </mat-menu>
+        </ng-container>
+
+        <!-- Login/Register Links -->
+        <ng-template #unauthenticated>
+          <div class="auth-links">
+            <a routerLink="/auth/login" mat-button>Sign In</a>
+            <a routerLink="/auth/register" mat-flat-button color="accent">Register</a>
+          </div>
         </ng-template>
       </div>
     </div>
   </div>
 </mat-toolbar>
 
-<mat-toolbar class="category-nav">
+<!-- Categories Menu (Sticky, shown on scroll) -->
+<div class="categories-bar mat-elevation-z1">
   <div class="container">
-    <nav class="category-links">
-      <a mat-button routerLink="/products" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">All Products</a>
-      <a mat-button routerLink="/products/category/electronics" routerLinkActive="active">Electronics</a>
-      <a mat-button routerLink="/products/category/fashion" routerLinkActive="active">Fashion</a>
-      <a mat-button routerLink="/products/category/home" routerLinkActive="active">Home & Kitchen</a>
-      <a mat-button routerLink="/products/category/beauty" routerLinkActive="active">Beauty</a>
-      <a mat-button routerLink="/products/category/books" routerLinkActive="active">Books</a>
-      <a mat-button routerLink="/products/category/sports" routerLinkActive="active">Sports</a>
-    </nav>
+    <div class="categories-wrapper">
+      <button mat-button [matMenuTriggerFor]="allCategories">
+        <mat-icon>menu</mat-icon> All Categories
+      </button>
+      
+      <mat-menu #allCategories="matMenu">
+        <button mat-menu-item routerLink="/categories/electronics">Electronics</button>
+        <button mat-menu-item routerLink="/categories/fashion">Fashion</button>
+        <button mat-menu-item routerLink="/categories/home">Home & Kitchen</button>
+        <button mat-menu-item routerLink="/categories/beauty">Beauty</button>
+        <button mat-menu-item routerLink="/categories/sports">Sports & Outdoors</button>
+      </mat-menu>
+      
+      <div class="popular-categories">
+        <a routerLink="/categories/electronics" mat-button>Electronics</a>
+        <a routerLink="/categories/fashion" mat-button>Fashion</a>
+        <a routerLink="/categories/home" mat-button>Home & Kitchen</a>
+        <a routerLink="/categories/beauty" mat-button>Beauty</a>
+        <a routerLink="/categories/sports" mat-button>Sports</a>
+      </div>
+      
+      <div class="deals-link">
+        <a routerLink="/deals" mat-button color="accent">
+          <mat-icon>local_offer</mat-icon> Today's Deals
+        </a>
+      </div>
+    </div>
   </div>
-</mat-toolbar>
+</div>

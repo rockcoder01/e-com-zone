@@ -1,0 +1,21 @@
+<div class="promotions-section">
+  <div class="promotions-container">
+    <div 
+      class="promotion-card" 
+      *ngFor="let promo of promotions"
+      [style.background-color]="promo.backgroundColor">
+      
+      <div class="promotion-content">
+        <h3 class="promotion-title">{{ promo.title }}</h3>
+        <p class="promotion-description">{{ promo.description }}</p>
+        <a [routerLink]="promo.linkUrl" mat-flat-button color="primary" class="promotion-button">
+          {{ promo.buttonText }}
+        </a>
+      </div>
+      
+      <div class="promotion-image-container">
+        <img [src]="promo.imageUrl" [alt]="promo.title" class="promotion-image">
+      </div>
+    </div>
+  </div>
+</div>

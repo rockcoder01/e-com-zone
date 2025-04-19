@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { Product } from '../../models/product.model';
 import * as ProductActions from '../actions/product.actions';
+import { Product } from '../../models/product.model';
 
 export interface ProductState {
   products: Product[];
@@ -24,60 +24,77 @@ export const initialState: ProductState = {
 
 export const productReducer = createReducer(
   initialState,
-  on(ProductActions.loadProducts, (state) => ({
+  
+  // Load Products
+  on(ProductActions.loadProducts, (state, { page, limit }) => ({
     ...state,
     loading: true,
-    error: null
+    error: null,
+    page: page || state.page,
+    limit: limit || state.limit
   })),
+  
   on(ProductActions.loadProductsSuccess, (state, { products, totalProducts }) => ({
     ...state,
     products,
     totalProducts,
-    loading: false,
-    error: null
+    loading: false
   })),
+  
   on(ProductActions.loadProductsFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
   })),
-  on(ProductActions.loadProduct, (state) => ({
+  
+  // Load Product
+  on(ProductActions.loadProduct, state => ({
     ...state,
+    selectedProduct: null,
     loading: true,
     error: null
   })),
+  
   on(ProductActions.loadProductSuccess, (state, { product }) => ({
     ...state,
     selectedProduct: product,
-    loading: false,
-    error: null
+    loading: false
   })),
+  
   on(ProductActions.loadProductFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
   })),
-  on(ProductActions.searchProducts, (state) => ({
+  
+  // Search Products
+  on(ProductActions.searchProducts, (state, { page, limit }) => ({
     ...state,
     loading: true,
-    error: null
+    error: null,
+    page: page || state.page,
+    limit: limit || state.limit
   })),
+  
   on(ProductActions.searchProductsSuccess, (state, { products, totalProducts }) => ({
     ...state,
     products,
     totalProducts,
-    loading: false,
-    error: null
+    loading: false
   })),
+  
   on(ProductActions.searchProductsFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error
   })),
+  
+  // Pagination
   on(ProductActions.setPage, (state, { page }) => ({
     ...state,
     page
   })),
+  
   on(ProductActions.setLimit, (state, { limit }) => ({
     ...state,
     limit

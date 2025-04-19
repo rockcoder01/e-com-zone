@@ -1,0 +1,39 @@
+<div class="home-container">
+  <!-- Hero Section with slider -->
+  <app-hero-section></app-hero-section>
+  
+  <!-- Categories Grid -->
+  <section class="section">
+    <div class="container">
+      <app-categories-section></app-categories-section>
+    </div>
+  </section>
+  
+  <!-- Featured Products -->
+  <section class="section featured-products-section">
+    <div class="container">
+      <h2 class="section-title">New Arrivals</h2>
+      
+      <!-- Loading Spinner -->
+      <div *ngIf="loading$ | async" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+      
+      <!-- Products Grid -->
+      <app-featured-products 
+        [products]="featuredProducts$ | async">
+      </app-featured-products>
+      
+      <div class="view-all-container">
+        <a mat-flat-button color="primary" routerLink="/products">View All Products</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Promotions and Special Deals -->
+  <section class="section promotions-section">
+    <div class="container">
+      <app-promotions-section></app-promotions-section>
+    </div>
+  </section>
+</div>

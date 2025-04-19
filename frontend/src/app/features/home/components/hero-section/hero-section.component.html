@@ -1,0 +1,43 @@
+<div class="hero-section">
+  <div class="hero-slider">
+    <!-- Slider Content -->
+    <div 
+      class="slide" 
+      *ngFor="let slide of slides; let i = index" 
+      [class.active]="i === currentSlide"
+      [style.background-image]="'url(' + slide.imageUrl + ')'">
+      
+      <div class="slide-content">
+        <h1 class="slide-title">{{ slide.title }}</h1>
+        <p class="slide-subtitle">{{ slide.subtitle }}</p>
+        <a 
+          [routerLink]="slide.ctaLink" 
+          mat-flat-button 
+          color="primary" 
+          class="slide-cta">
+          {{ slide.ctaText }}
+        </a>
+      </div>
+    </div>
+    
+    <!-- Slider Controls -->
+    <div class="slider-controls">
+      <button mat-icon-button class="nav-button prev" (click)="prevSlide()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      
+      <div class="slider-dots">
+        <span 
+          *ngFor="let slide of slides; let i = index" 
+          class="dot" 
+          [class.active]="i === currentSlide"
+          (click)="setCurrentSlide(i)">
+        </span>
+      </div>
+      
+      <button mat-icon-button class="nav-button next" (click)="nextSlide()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

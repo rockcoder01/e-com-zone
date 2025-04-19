@@ -1,4 +1,10 @@
-main {
-  min-height: calc(100vh - 160px); /* Adjust based on your header and footer height */
-  padding: 20px 0;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px 0;
 }
