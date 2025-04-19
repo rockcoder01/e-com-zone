@@ -1,0 +1,70 @@
+<mat-toolbar color="primary">
+  <div class="container">
+    <div class="toolbar-content">
+      <div class="logo-container">
+        <a routerLink="/" class="logo">
+          <span>EasyBusy</span>
+        </a>
+      </div>
+      
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="search-field">
+          <input matInput placeholder="Search products..." type="search">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      
+      <div class="nav-links">
+        <ng-container *ngIf="!(isAuthenticated$ | async); else authenticatedNav">
+          <button mat-button routerLink="/auth/login">Login</button>
+          <button mat-raised-button color="accent" routerLink="/auth/register">Register</button>
+        </ng-container>
+        
+        <ng-template #authenticatedNav>
+          <button mat-icon-button routerLink="/cart" matTooltip="Cart">
+            <mat-icon>shopping_cart</mat-icon>
+          </button>
+          
+          <button mat-icon-button (click)="navigateToWishlist()" matTooltip="Wishlist">
+            <mat-icon>favorite</mat-icon>
+          </button>
+          
+          <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+            <span *ngIf="currentUser$ | async as user">{{ user.firstName }}</span>
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item (click)="navigateToProfile()">
+              <mat-icon>person</mat-icon>
+              <span>My Profile</span>
+            </button>
+            <button mat-menu-item routerLink="/user/orders">
+              <mat-icon>shopping_bag</mat-icon>
+              <span>My Orders</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="onLogout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar class="category-nav">
+  <div class="container">
+    <nav class="category-links">
+      <a mat-button routerLink="/products" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">All Products</a>
+      <a mat-button routerLink="/products/category/electronics" routerLinkActive="active">Electronics</a>
+      <a mat-button routerLink="/products/category/fashion" routerLinkActive="active">Fashion</a>
+      <a mat-button routerLink="/products/category/home" routerLinkActive="active">Home & Kitchen</a>
+      <a mat-button routerLink="/products/category/beauty" routerLinkActive="active">Beauty</a>
+      <a mat-button routerLink="/products/category/books" routerLinkActive="active">Books</a>
+      <a mat-button routerLink="/products/category/sports" routerLinkActive="active">Sports</a>
+    </nav>
+  </div>
+</mat-toolbar>
